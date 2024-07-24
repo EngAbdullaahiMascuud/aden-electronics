@@ -1,0 +1,1 @@
+var url = window.location.protocol=='https:' ? "https://electronics-server.onrender.com/" : "http://localhost:4200/"

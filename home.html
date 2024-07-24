@@ -21,6 +21,7 @@
     </div>
     <!-- menu -->
     <script src="jquery-3.3.1.min.js"></script>
+    <script src="url.matcher.js"></script>
 
     <script>
       $(".back").click(()=>{
@@ -32,7 +33,7 @@
         $.ajax({
           method: "get",
           dataType: "JSON",
-          url: "http://localhost:4200/foods/"+id,
+          url: url+"foods/"+id,
           success: function(data) {
             var response = data.data;
             console.log(response);  
@@ -49,7 +50,7 @@
               htmlData +=`
                <div class="box"  onclick="open_file({link: 'https://wa.link/rvt3ua'})">
             <div class="overly"></div>
-          <img src="http://localhost:4200/uploads/${image}" alt="menu-img" />
+          <img src="${url}uploads/${image}" alt="menu-img" />
           <div class="info">
             <h1>${food_name}</h1>
               <div class="descripion-con">

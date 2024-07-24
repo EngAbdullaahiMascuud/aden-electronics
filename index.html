@@ -34,6 +34,7 @@
     <!-- menu -->
 
     <script src="jquery-3.3.1.min.js"></script>
+    <script src="url.matcher.js"></script>
     <!-- js -->
     <script>
       function GetData(){
@@ -41,7 +42,7 @@
         $.ajax({
           method: "get",
           dataType: "JSON",
-          url: "http://localhost:4200/categories/",
+          url: url+"categories/",
           success: function(data) {
             var response = data.data;
             var htmlData ="";
@@ -51,7 +52,7 @@
               htmlData +=`
                <div class="box"  onclick="open_new_file({ value: './home.html','id': ${cat_id} })">
             <div class="overly"></div>
-          <img src="http://localhost:4200/uploads/${photo}" alt="menu-img" />
+          <img src="${url}uploads/${photo}" alt="menu-img" />
           <div class="info">
             <h1>${name}</h1>
           </div>
