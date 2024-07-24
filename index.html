@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layton | Cafe</title>
+    <link rel="stylesheet" href="custom.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="./img/AADAN.png" alt="" />
+      </div>
+      <div class="title">
+        <h1></h1>
+      </div>
+    </header>
+    <!-- menu -->
+    <div class="menu-container">
+      <div class="flex-box menu">
+        <div class="box"  onclick="open_new_file({ value: './home.html' })">
+            <div class="overly"></div>
+          <img src="./img/img-02.webp" alt="menu-img" />
+          <div class="info">
+            <h1>IPHONES</h1>
+          </div>
+        </div>
+      
+      
+      </div>
+    
+    </div>
+    
+    <!-- menu -->
+
+    <script src="jquery-3.3.1.min.js"></script>
+    <!-- js -->
+    <script>
+      function GetData(){
+
+        $.ajax({
+          method: "get",
+          dataType: "JSON",
+          url: "http://localhost:4200/categories/",
+          success: function(data) {
+            var response = data.data;
+            var htmlData ="";
+            Array.from(response).forEach(value=>{
+              console.log(value)
+              var {cat_id,name,description,photo}= value;
+              htmlData +=`
+               <div class="box"  onclick="open_new_file({ value: './home.html','id': ${cat_id} })">
+            <div class="overly"></div>
+          <img src="http://localhost:4200/uploads/${photo}" alt="menu-img" />
+          <div class="info">
+            <h1>${name}</h1>
+          </div>
+        </div>
+              `
+            })
+            console.log(data);
+            $(".menu").html("")
+            $(".menu").html(htmlData)
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        })
+      }
+
+      GetData();
+
+        function open_new_file(link){
+            console.log(link.value)
+            // location.href = link.value;
+          //opening new tab
+          localStorage.setItem("id",link.id)
+            window.location.href=(link.value);
+        }
+    </script>
+    <!-- js -->
+  </body>
+</html>

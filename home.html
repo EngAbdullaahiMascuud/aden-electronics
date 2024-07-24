@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home</title>
+    <link rel="stylesheet" href="custom.css" />
+  </head>
+  <body>
+    <div class="menu-container">
+      <div class="alert" style="display: none; text-align: center; background: rgb(53, 53, 83); padding: 10px; border-radius: 10px; color: white">
+       <div class="con">
+        <h2>Category-ga Aaad Soo Dooratay, Ma Hayno Product-yadiisa Wll. 😊😊</h2>
+        <button class="back" style="padding: 10px; margin-top: 10px; background: rgb(154, 154, 249); border: 0; border-radius: 15px; width:210px; cursor: pointer;">Ku Laabo Page-kii Hore</button>
+       </div>
+      </div>
+      <div class="flex-box menu">
+    
+      
+      </div>
+    </div>
+    <!-- menu -->
+    <script src="jquery-3.3.1.min.js"></script>
+
+    <script>
+      $(".back").click(()=>{
+        window.location.href="./index.html"
+      })
+      function GetData(){
+
+        var id = localStorage.getItem("id");
+        $.ajax({
+          method: "get",
+          dataType: "JSON",
+          url: "http://localhost:4200/foods/"+id,
+          success: function(data) {
+            var response = data.data;
+            console.log(response);  
+            if(Array.from(response).length<=0){
+              $(".alert").css("display","block");
+            }else
+            $(".alert").css("display","none");
+
+            var htmlData ="";
+            Array.from(response).forEach(value=>{
+              console.log(value)
+            
+              var {id,food_name,price,image,eDescription}= value;
+              htmlData +=`
+               <div class="box"  onclick="open_file({link: 'https://wa.link/rvt3ua'})">
+            <div class="overly"></div>
+          <img src="http://localhost:4200/uploads/${image}" alt="menu-img" />
+          <div class="info">
+            <h1>${food_name}</h1>
+              <div class="descripion-con">
+                    <strong>Price : $${price}</strong>
+                    <p>Memroy Size: <strong>${eDescription}</strong></p>
+                  </div>
+        </div>
+          </div>
+         
+              `
+            })
+            console.log(data);
+            $(".menu").html("")
+            $(".menu").html(htmlData)
+          },
+          error: function(error) {
+            console.log(error);
+          }
+        })
+      }
+
+      GetData();
+      function open_file(link){
+       window.location.href=link.link;
+    }
+    </script>
+  </body>
+
+  
+</html>
